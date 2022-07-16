@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./script.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="main">
+        <div class="menu">
+            <div class="waviy">
+                <span style="--i:1">T</span>
+                <span style="--i:2">I</span>
+                <span style="--i:3">C</span>
+                <span style="--i:4">-</span>
+                <span style="--i:5">T</span>
+                <span style="--i:6">A</span>
+                <span style="--i:7">C</span>
+                <span style="--i:8">-</span>
+                <span style="--i:9">T</span>
+                <span style="--i:10">O</span>
+                <span style="--i:11">E</span>
+            </div>
+            <h3 class="subtitle">VS</h3>
+            <div class="start-btn player">
+                PLAYER
+            </div>
+            <div class="start-btn ai">
+                AI
+            </div>
+        </div>
+        <div class="game">
+            <div class="stats user-stats">
+                <h3>Player 1</h3>
+                <p>WINS : 
+                    <span class="user-cnt">
+                        0  
+                    </span>
+                </p>
+            </div>
+            <div class="board">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="stats opponent-stats">
+                <h3>Player X</h3>
+                <p>WINS : 
+                    <span class="opp-cnt">
+                        0  
+                    </span>
+                </p>
+            </div>
+            <div class="game-btn-container">
+                <div class="game-btn rematch-tbn">
+                    REMATCH
+                </div>
+                <div class="game-btn exit-btn">
+                    EXIT
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

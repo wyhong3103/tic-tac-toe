@@ -1,0 +1,217 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+html{
+    --font: 'Poiret One', cursive;
+    font-size : 10px;
+}
+/*
+
+    MAIN LAYOUT
+
+*/
+
+.main{
+    height: 100vh;
+    width: 100vw;
+    padding: 7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+}
+
+/*
+
+    MENU LAYOUT
+
+*/
+
+.menu{
+    display: none;
+    font-family: var(--font);
+    grid-template-columns: repeat(2, 1fr) ;
+    grid-template-rows: repeat(7, 1fr) ;
+    gap: 1rem;
+}
+
+.waviy{
+    grid-row: 1 / span 3;
+    grid-column: 1/ -1;
+}
+
+.subtitle{
+    grid-row : 4 / span 2;
+    grid-column: 1/ -1;
+}
+
+.start-btn{
+    grid-row : 6 / -1;
+}
+
+.player{
+    grid-column: 1 / 2;
+}
+
+.ai{
+    grid-column: 2 / -1;
+}
+
+/*
+
+    MENU STYLE
+
+*/
+
+.menu > *{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*
+
+ Flip Text Animation - Copied From https://alvarotrigo.com/blog/css-text-animations/
+
+*/
+.waviy {
+    position: relative;
+}
+.waviy span {
+    position: relative;
+    display: inline-block;
+    font-size: 10rem;
+    text-transform: uppercase;
+    animation: flip 2s infinite;
+    animation-delay: calc(.2s * var(--i))
+}
+
+@keyframes flip {
+    0%,80% {
+        transform: rotateY(360deg) 
+    }
+}
+
+.subtitle{
+    font-size: 3rem;
+}
+
+.start-btn{
+    font-size: 6rem;
+    transition: background-color 0.3s;
+}
+
+.start-btn:hover{
+    cursor: pointer;
+    background-color: aliceblue;
+}
+
+
+/*
+
+    GAME LAYOUT
+
+*/
+
+.game{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    justify-items: center;
+    gap : 2rem;
+}
+
+.stats{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.user-stats{
+    grid-row : 1 / -2;
+    grid-column : 1 / 2;
+}
+
+.opponent-stats{
+    grid-row : 1 / -2;
+    grid-column: -2 / -1;
+}
+
+.board{
+    grid-row : 1 / -2;
+    grid-column : 2 / -2;
+
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.game-btn-container{
+    grid-row : -2 / -1; 
+    grid-column : 1 / -1;
+    width : 60%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+/*
+
+    GAME STYLE
+
+*/
+.stats{
+    font-family: var(--font);
+}
+
+.stats h3{
+    font-size : 5rem;
+}
+
+.stats p, .stats span{
+    font-size: 3rem;
+}
+
+.board{
+    height: 55rem;
+    width: 55rem;
+    border : 1px solid #555;
+}
+
+.cell{
+    border: 1px solid #555;
+    transition: background-color 0.3s;
+}
+
+.cell:hover{
+    cursor: pointer;
+    background-color: aliceblue;
+}
+
+
+.game-btn{
+    display: flex;
+    width : 100%;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font);
+    font-size : 3rem;
+    font-weight:600;
+    padding : 1rem;
+    transition: background-color 0.3s;
+}
+
+.game-btn:hover{
+    cursor: pointer;
+    background-color: aliceblue;
+}
+
+
+
