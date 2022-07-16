@@ -32,7 +32,7 @@ html{
 */
 
 .menu{
-    display: none;
+    display: grid;
     font-family: var(--font);
     grid-template-columns: repeat(2, 1fr) ;
     grid-template-rows: repeat(7, 1fr) ;
@@ -120,7 +120,7 @@ html{
 .game{
     width: 100%;
     height: 100%;
-    display: grid;
+    display: none;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(5, 1fr);
     justify-items: center;
@@ -186,6 +186,9 @@ html{
 }
 
 .cell{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 1px solid #555;
     transition: background-color 0.3s;
 }
@@ -194,7 +197,6 @@ html{
     cursor: pointer;
     background-color: aliceblue;
 }
-
 
 .game-btn{
     display: flex;
@@ -213,5 +215,10 @@ html{
     background-color: aliceblue;
 }
 
+.cell img{
+    height : 80%;
+    width : 80%;
+    padding : 1rem;
+}
 
 
