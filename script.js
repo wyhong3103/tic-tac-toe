@@ -88,11 +88,25 @@ let DisplayController = function(){
         pop_up_box.style.display = "flex";
     }
 
+    let mark = function(div){
+        let img = document.createElement("img");
+        div.classList.add("marked");
+        if (Game.getTurn() % 2){
+            img.src = "./assets/cross.svg";
+            img.alt = "cross.svg";
+            div.appendChild(img);
+        }else{
+            img.src = "./assets/circle.svg";
+            img.alt = "circle.svg";
+            div.appendChild(img);
+        }
+    }
+
     let exit = function(){
         game_container.style.display = 'none';
         menu.style.display = 'grid';
     };
-    return {reset_board, exit, getBoard, updateScore, freezeBoard, startTurn, changeTurn, updateWinner, showPopUp, showBg, hideBg};
+    return {reset_board, exit, mark, getBoard, updateScore, freezeBoard, startTurn, changeTurn, updateWinner, showPopUp, showBg, hideBg};
 }();
 
 let Game = function(){
@@ -171,10 +185,58 @@ let Game = function(){
                 if (j === -1) found_unfilled = true;
             }
         }
+        //-1 = Not the end of the game, 2 = DRAW
         return (found_unfilled ? -1 : 2);
     }
 
-    return {mode,getTurn,getBoard, reset_board,nextTurn, exit, check_win, oppwin, userwin, getScore};
+    let ai_play = function(r, c, turn){
+        let res = check_win();
+        if (res != -1){
+            //Set it to, 0 = draw, 1 = AI won, -1 = player won
+            //Originally, 2 = draw, 1 = Opp won, 0 = player won
+            res = (res === 2 ? 0 : (res === 1 ? 1 : -1));
+            return [r, c, res];
+        } 
+
+        let temp = [];
+        for(let i = 0; i < 3; i++){
+            let temp1 = [];
+            for(let j = 0; j <3; j++){
+                temp1.push(null);
+            }
+            temp.push(temp1);
+        }
+
+        for(let i = 0; i < 3; i++){
+            for(let j = 0; j < 3 ; j++){
+                if (_board[i][j] != -1) continue;
+                _board[i][j] = turn;
+
+                let val = ai_play(i, j, (turn+1)% 2);
+                temp[i][j] = val[2];
+
+                _board[i][j] = -1;
+            }
+        } 
+
+        let bst = [-1,-1,-1];
+        for(let i = 0; i < 3; i++){
+            for(let j = 0; j < 3; j++){
+                if (temp[i][j] === null) continue;
+                if (bst[0] === -1){
+                    bst = [i,j,temp[i][j]];
+                }
+                if (turn%2){
+                    if (temp[i][j] >= bst[2]) bst = [i, j, temp[i][j]];
+                }else{
+                    if (temp[i][j] <= bst[2]) bst = [i, j, temp[i][j]];
+                }
+            }
+        }
+        return bst;
+    };
+
+    return {mode,getTurn,getBoard, reset_board,nextTurn, exit, check_win, oppwin, userwin, getScore, ai_play};
 }();
 
 
@@ -215,23 +277,20 @@ let init_board = function(){
                 //r and c got saved here, which idk how it works
                 let r = i, c = j;
                 if (this.classList.contains("marked")) return;
-                if (Game.mode === 0){
-                    let img = document.createElement("img");
-                    this.classList.add("marked");
-                    if (Game.getTurn() % 2){
-                        img.src = "./assets/cross.svg";
-                        img.alt = "cross.svg";
-                        this.appendChild(img);
-                    }else{
-                        img.src = "./assets/circle.svg";
-                        img.alt = "circle.svg";
-                        this.appendChild(img);
-                    }
-                }
+                DisplayController.mark(this);
                 Game.getBoard()[r][c] = Game.getTurn() % 2;
                 Game.nextTurn();
                 DisplayController.changeTurn();
                 endround();
+                if (Game.mode === 1 && Game.check_win() === -1){
+                    let move = Game.ai_play(-1,-1,1);
+                    let cell = DisplayController.getBoard()[move[0]][move[1]];
+                    DisplayController.mark(cell);
+                    Game.getBoard()[move[0]][move[1]] = 1;
+                    Game.nextTurn();
+                    DisplayController.changeTurn();
+                    endround();
+                }
             });
         }
     }
