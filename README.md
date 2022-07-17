@@ -8,4 +8,4 @@ TIC-TAC-TOE Flip Text Animation is copied From [here](https://alvarotrigo.com/bl
 
 ## Live 
 
-[Click me!](https://wyhong3103.github.io/tic-tac-toe/
+[Click me!](https://wyhong3103.github.io/tic-tac-toe/)
