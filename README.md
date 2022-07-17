@@ -4,4 +4,4 @@ A pretty fun project in general, gained a little insights into minimax algorithm
 
 ## Live 
 
-[Click me!] (https://wyhong3103.github.io/tic-tac-toe/)
+[Click me!](https://wyhong3103.github.io/tic-tac-toe/)
