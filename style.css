@@ -275,3 +275,35 @@ html{
 }
 
 
+/*
+
+    FOOTER
+
+*/
+
+.footer{
+    font-family: var(--font);
+    font-weight: 700;
+    font-size : 2rem;
+
+    position : absolute;
+    bottom : 1.5rem;
+    right : 4rem;
+    display: flex;
+    flex-direction: row;
+    gap : 1rem;
+}
+
+.footer a{
+    display : flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+    transition :all  0.3s;
+}
+.footer a:hover{
+    color: #AAA;
+}

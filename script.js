@@ -189,6 +189,7 @@ let Game = function(){
         return (found_unfilled ? -1 : 2);
     }
 
+    //Based on MiniMax ALgorithm
     let ai_play = function(r, c, turn){
         let res = check_win();
         if (res != -1){
