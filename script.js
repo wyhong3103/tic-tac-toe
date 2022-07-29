@@ -3,21 +3,21 @@
     DOM element
 
 */
-let start_player = document.querySelector(".player");
-let start_ai = document.querySelector(".ai");
-let menu = document.querySelector(".menu");
-let game_container = document.querySelector(".game");
-let gameboard = document.querySelector(".board");
-let exit_btn = document.querySelector(".exit-btn");
-let rematch_btn = document.querySelector(".rematch-btn");
-let user_name = document.querySelector(".user-stats h3")
-let opp_name = document.querySelector(".opponent-stats h3");
-let opp_score = document.querySelector(".opp-cnt");
-let user_score = document.querySelector(".user-cnt");
-let pop_up_box = document.querySelector(".pop-up");
-let pop_up_msg = document.querySelector(".pop-up h3");
-let pop_up_btn = document.querySelector(".pop-up-btn");
-let hide_bg = document.querySelector(".bg-hide")
+const start_player = document.querySelector(".player");
+const start_ai = document.querySelector(".ai");
+const menu = document.querySelector(".menu");
+const game_container = document.querySelector(".game");
+const gameboard = document.querySelector(".board");
+const exit_btn = document.querySelector(".exit-btn");
+const rematch_btn = document.querySelector(".rematch-btn");
+const user_name = document.querySelector(".user-stats h3")
+const opp_name = document.querySelector(".opponent-stats h3");
+const opp_score = document.querySelector(".opp-cnt");
+const user_score = document.querySelector(".user-cnt");
+const pop_up_box = document.querySelector(".pop-up");
+const pop_up_msg = document.querySelector(".pop-up h3");
+const pop_up_btn = document.querySelector(".pop-up-btn");
+const hide_bg = document.querySelector(".bg-hide")
 
 
 /*
@@ -25,9 +25,9 @@ let hide_bg = document.querySelector(".bg-hide")
     MODULE
 
 */
-let DisplayController = function(){
+const DisplayController = function(){
     let _board = [];
-    let reset_board = function(){
+    const reset_board = function(){
         //RESET CELL
         gameboard.innerHTML = "";
         _board = [];
@@ -43,7 +43,7 @@ let DisplayController = function(){
         }
     }
 
-    let freezeBoard = function(){
+    const freezeBoard = function(){
         for(let i of _board){
             for(let j of i){
                 let temp = j.cloneNode(true);
@@ -52,43 +52,43 @@ let DisplayController = function(){
         }
     };
     
-    let updateScore = function(){
+    const updateScore = function(){
         user_score.textContent = Game.getScore()[0];
         opp_score.textContent = Game.getScore()[1];
     };
 
-    let updateWinner = function(i, win){
+    const updateWinner = function(i, win){
         pop_up_msg.textContent = (i % 2 ? (Game.mode === 0 ? "Player 2" : "AI") : "Player 1");
         if (win) pop_up_msg.textContent += ", you won!";
         else pop_up_msg.textContent = "Draw!";
     }
 
-    let changeTurn = function(){
+    const changeTurn = function(){
         user_name.classList.toggle("turn");
         opp_name.classList.toggle("turn");
     }
 
-    let startTurn = function(){
+    const startTurn = function(){
         user_name.classList.add("turn");
         opp_name.classList.remove("turn");
     }
 
-    let getBoard = function(){
+    const getBoard = function(){
         return _board;
     };
 
-    let showBg = function(){
+    const showBg = function(){
         hide_bg.style.display = "block";
     }
-    let hideBg = function(){
+    const hideBg = function(){
         hide_bg.style.display = "none";
     }
 
-    let showPopUp = function(){
+    const showPopUp = function(){
         pop_up_box.style.display = "flex";
     }
 
-    let mark = function(div){
+    const mark = function(div){
         let img = document.createElement("img");
         div.classList.add("marked");
         if (Game.getTurn() % 2){
@@ -102,14 +102,14 @@ let DisplayController = function(){
         }
     }
 
-    let exit = function(){
+    const exit = function(){
         game_container.style.display = 'none';
         menu.style.display = 'grid';
     };
     return {reset_board, exit, mark, getBoard, updateScore, freezeBoard, startTurn, changeTurn, updateWinner, showPopUp, showBg, hideBg};
 }();
 
-let Game = function(){
+const Game = function(){
     //0 = player, 1 = ai
     let mode = 0;    
     //even = player's turn, odd = next player/ai's turn
@@ -121,7 +121,7 @@ let Game = function(){
     let _user_score = 0;
     let _opp_score = 0;
 
-    let reset_board = function(){
+    const reset_board = function(){
         _board = [];
         for(let i = 0; i < 3; i++){
             let temp = [];
@@ -136,37 +136,37 @@ let Game = function(){
 
     //Trying to not directly increment the following, or else things would get weird
 
-    let oppwin = function(){
+    const oppwin = function(){
         _opp_score++;
     }
 
-    let userwin = function(){
+    const userwin = function(){
         _user_score++;
     }
 
-    let nextTurn = function(){
+    const nextTurn = function(){
         turn++;
     }
 
 
-    let getScore = function(){
+    const getScore = function(){
         return [_user_score,_opp_score];
     }
 
-    let getBoard = function(){
+    const getBoard = function(){
         return _board;
     }
 
-    let getTurn = function(){
+    const getTurn = function(){
         return turn;
     }
 
-    let exit = function(){
+    const exit = function(){
         _opp_score = 0;
         _user_score = 0;
     }
 
-    let check_win = function(){
+    const check_win = function(){
         for(let i = 0; i < 3; i++){
             if (JSON.stringify(_board[i]) === JSON.stringify([1,1,1])) return 1;
             if (JSON.stringify(_board[i]) === JSON.stringify([0,0,0])) return 0;
@@ -190,7 +190,7 @@ let Game = function(){
     }
 
     //Based on MiniMax ALgorithm
-    let ai_play = function(r, c, turn){
+    const ai_play = function(r, c, turn){
         let res = check_win();
         if (res != -1){
             //Set it to, 0 = draw, 1 = AI won, -1 = player won
@@ -248,7 +248,7 @@ let Game = function(){
 */
 
 
-let endround = function(){
+const endround = function(){
     let winner = Game.check_win();
     if (winner === -1) return;
     else if (winner === 0){
@@ -268,7 +268,7 @@ let endround = function(){
     DisplayController.showPopUp();
 }
 
-let init_board = function(){
+const init_board = function(){
     DisplayController.reset_board();
     Game.reset_board();
     DisplayController.startTurn();
